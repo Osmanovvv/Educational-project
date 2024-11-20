@@ -10,5 +10,4 @@ var server = new Server({
    nick: "WorkingServer",
   })
 
-
 server.save();
