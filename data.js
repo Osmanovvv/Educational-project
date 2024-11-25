@@ -1,16 +1,16 @@
 var data = [{
-  title: 'Сервер работает', nick: 'WorkingServer',
-  avatar: 'images/development.jpg',
+  title: 'Сервер работает', nick: 'development',
+  avatar: '/images/development.jpg',
   desc: 'Привет, я Сервер, frontend разработчик. Создаю удобные и функциональные интерфейсы, чтобы сделать взаимодействие с приложениями простым и увлекательным.'
   },
   {
-  title: 'Сервер с программистами', nick: 'TeamServer',
-  avatar: 'images/programmers.jpg',
+  title: 'Сервер с программистами', nick: 'programmers',
+  avatar: '/images/programmers.jpg',
   desc: "Привет, я Сервер, frontend разработчик. На этом фото я в компании опытных программистов, с которыми делюсь идеями и вдохновляюсь для новых решений в разработке."
   },
   {
-  title: 'Сервер в будущем', nick: 'FutureVision',
-  avatar: 'images/future.jpg',
+  title: 'Сервер в будущем', nick: 'future',
+  avatar: '/images/future.jpg',
   desc: "Привет, я Сервер, frontend разработчик. На этом фото я — уже состоявшийся человек, который прошел долгий путь и добился успеха, претворяя свои идеи в жизнь"
   }
   ];
