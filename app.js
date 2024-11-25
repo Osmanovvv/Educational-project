@@ -6,6 +6,7 @@ var logger = require('morgan');
 var mongoose = require('mongoose')
 mongoose.connect('mongodb://localhost/tc2024')
 var session = require("express-session")
+var MongoStore = require('connect-mongo');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -26,14 +27,14 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(session({
   secret: "Servers",
-  cookie: { 
-    maxAge: 60 * 1000, // Время жизни cookie (1 минута)
-    httpOnly: false    // Разрешить доступ к cookie через `document.cookie`
-  },
-  proxy: true,         // Если вы используете обратный прокси (например, nginx)
-  resave: true,        // Пересохранять сессии даже без изменений
-  saveUninitialized: true // Сохранять пустые сессии
-}));
+  cookie:{maxAge:60*1000},
+  proxy: true,
+  resave: true,
+  saveUninitialized: true,
+  store: MongoStore.create({mongoUrl:
+  'mongodb://localhost/tc2024'})
+    
+  }))
 
 
 app.use('/', indexRouter);
