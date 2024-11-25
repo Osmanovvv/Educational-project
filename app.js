@@ -7,6 +7,7 @@ var mongoose = require('mongoose')
 mongoose.connect('mongodb://localhost/tc2024')
 var session = require("express-session")
 
+var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var servers = require("./routes/servers");
 
@@ -23,17 +24,25 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(session({ 
+app.use(session({
   secret: "Servers",
-  cookie:{maxAge:60*1000},
-  proxy: true,
-  resave: true,
-  saveUninitialized: true
-  }))
+  cookie: { 
+    maxAge: 60 * 1000, // Время жизни cookie (1 минута)
+    httpOnly: false    // Разрешить доступ к cookie через `document.cookie`
+  },
+  proxy: true,         // Если вы используете обратный прокси (например, nginx)
+  resave: true,        // Пересохранять сессии даже без изменений
+  saveUninitialized: true // Сохранять пустые сессии
+}));
 
-app.use('/', servers);
-app.use('/servers', servers);
+
+app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/servers', servers);
+
+// app.use('/', servers);
+// app.use('/servers', servers);
+// app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
