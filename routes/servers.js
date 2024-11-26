@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var Server = require('../models/server').Server;
+var checkAuth = require("../middlewares/checkAuth.js");
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
@@ -9,7 +10,7 @@ router.get('/', function(req, res, next) {
 });
 
 /* Страница Серверов */
-router.get("/:nick", async function(req, res, next) {
+router.get("/:nick", checkAuth, async function(req, res, next) {
   var servers = await Server.find({nick: req.params.nick});
   console.log(servers)
   if(!servers.length) return next(new Error("Нет Сервера"))
